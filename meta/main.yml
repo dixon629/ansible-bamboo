@@ -1,13 +1,13 @@
 ---
 galaxy_info:
-  author: Mark Phillips
+  author: Guan Hui
   description: Install Atlassian Bamboo
   company: VNTX
   license: license (BSD)
   min_ansible_version: 1.2
   #
   # Below are all platforms currently available. Just uncomment
-  # the ones that apply to your role. If you don't see your 
+  # the ones that apply to your role. If you don't see your
   # platform on this list, let us know and we'll get it added!
   #
   platforms:
@@ -108,4 +108,3 @@ galaxy_info:
   #- system
   #- web
 dependencies: []
-  
