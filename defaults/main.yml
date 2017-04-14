@@ -4,7 +4,7 @@
 # psycopg2 needed to check superuser has password
 bamboo_prerequisites:
   - python-psycopg2
-bamboo_version:   5.9.7
+bamboo_version:   5.15.5
 bamboo_baseurl:   http://www.atlassian.com/software/bamboo/downloads/binary
 bamboo_installer: atlassian-bamboo-{{ bamboo_version }}.tar.gz
 bamboo_user:      bamboo
@@ -12,6 +12,6 @@ bamboo_user:      bamboo
 bamboo_dbconnector: postgresql
 bamboo_tmp:       /var/tmp
 bamboo_installto: /opt
-bamboo_datadir:   /srv/atlassian/bamboo-data
+bamboo_datadir:   /var/atlassian/bamboo
 bamboo_dbname:    bamboo
 bamboo_dbuser:    bamboo
