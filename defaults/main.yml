@@ -15,5 +15,5 @@ bamboo_installto: /opt
 bamboo_datadir:   /var/atlassian/bamboo
 bamboo_dbname:    bamboo
 bamboo_dbuser:    bamboo
-bamboo_port: 80
+bamboo_port: 8085
 java_home: /usr/lib/jvm/jre
