@@ -2,7 +2,7 @@
 <!--
    ====================================================================================
 
-   Atlassian Bamboo Standalone Edition Tomcat Configuration.
+   Atlassian Bamboo Server Edition Tomcat Configuration.
 
 
    See the following for more information
@@ -31,8 +31,6 @@
 
     <!--APR library loader. Documentation at /docs/apr.html -->
     <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on"/>
-    <!--Initialize Jasper prior to webapps are loaded. Documentation at /docs/jasper-howto.html -->
-    <Listener className="org.apache.catalina.core.JasperListener"/>
     <!-- JMX Support for the Tomcat server. Documentation at /docs/non-existent.html -->
     <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener"/>
 
@@ -47,57 +45,63 @@
     -->
     <Service name="Catalina">
 
-        <Connector port="8085"
+        <Connector
+            protocol="HTTP/1.1"
+            port="8085"
 
-                   maxThreads="150"
-                   minSpareThreads="25"
-                   maxSpareThreads="75"
-                   connectionTimeout="20000"
+            maxThreads="150" minSpareThreads="25"
+            connectionTimeout="20000"
+            disableUploadTimeout="true"
+            acceptCount="100"
 
-                   enableLookups="false"
-                   maxHttpHeaderSize="8192"
-                   protocol="HTTP/1.1"
-                   useBodyEncodingForURI="true"
-                   redirectPort="8443"
-                   acceptCount="100"
-                   disableUploadTimeout="true"/>
+            enableLookups="false"
+            maxHttpHeaderSize="8192"
+
+            useBodyEncodingForURI="true"
+            URIEncoding="UTF-8"
+
+            redirectPort="8443"
+            />
 
         <!--
         ====================================================================================
-
         To run Bamboo via HTTPS:
-
              * Uncomment the Connector below
              * Execute:
                  %JAVA_HOME%\bin\keytool -genkey -alias tomcat -keyalg RSA (Windows)
                  $JAVA_HOME/bin/keytool -genkey -alias tomcat -keyalg RSA  (Unix)
                with a password value of "changeit" for both the certificate and the keystore itself.
-             * If you are on JDK1.3 or earlier, download and install JSSE 1.0.2 or later, and put the JAR files into
-               "$JAVA_HOME/jre/lib/ext"
              * Restart and visit https://localhost:8443/
 
              For more info, see :
-
               https://confluence.atlassian.com/display/BAMBOO/Securing+Bamboo+with+Tomcat+using+SSL
-
               and
-
-              http://tomcat.apache.org/tomcat-7.0-doc/ssl-howto.html
-
+              http://tomcat.apache.org/tomcat-8.0-doc/ssl-howto.html
         ====================================================================================
         -->
+
         <!--
-            <Connector port="8443" maxHttpHeaderSize="8192" SSLEnabled="true"
-              maxThreads="150" minSpareThreads="25" maxSpareThreads="75"
-              enableLookups="false" disableUploadTimeout="true"
-              acceptCount="100" scheme="https" secure="true"
-              clientAuth="false" sslProtocol="TLS" useBodyEncodingForURI="true"/>
+        <Connector
+            port="8443"
+
+            maxThreads="150" minSpareThreads="25"
+            connectionTimeout="20000"
+            disableUploadTimeout="true"
+            acceptCount="100"
+
+            enableLookups="false"
+            maxHttpHeaderSize="8192"
+
+            useBodyEncodingForURI="true"
+            URIEncoding="UTF-8"
+
+            scheme="https" secure="true" SSLEnabled="true" sslProtocol="TLS"
+            clientAuth="false"
+        />
         -->
-
-
         <!--
          ====================================================================================
-
+         
          If you have Apache AJP Connector (mod_ajp) as a proxy in front of Bamboo you should uncomment the following connector configuration line
 
          See the following for more information :
@@ -126,6 +130,8 @@
             <Valve className="org.apache.catalina.valves.AccessLogValve" resolveHosts="false"
                    pattern="%a %t &quot;%m %U%q %H&quot; %s %b %D &quot;%{Referer}i&quot; &quot;%{User-Agent}i&quot;"/>
 
+            <!-- StuckThreadDetectionValve added below to print stack traces if a thread has been stuck for 60 seconds -->
+            <Valve className="org.apache.catalina.valves.StuckThreadDetectionValve" threshold="60" />
         </Engine>
     </Service>
 </Server>
