@@ -11,7 +11,7 @@
   yum:
     name: "{{ item }}"
     state: present
-  with_items: bamboo_prerequisites
+  with_items: "{{bamboo_prerequisites}}"
 
 - name: Ensure group exists
   group:
@@ -110,4 +110,3 @@
     name: bamboo
     state: restarted
     enabled: yes
-

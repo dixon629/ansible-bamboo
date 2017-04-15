@@ -14,11 +14,11 @@
 # Name of app
 prog=bamboo
 # Name of the user to run as
-user=bamboo
+user={{ bamboo_user }}
 # Location of application's directory
 base={{ bamboo_installto }}/atlassian/${prog}-{{ bamboo_version }}
 # Location of Java JDK
-export JAVA_HOME=/usr/lib/jvm/jre
+export JAVA_HOME={{ java_home }}
 
 # Source function library.
 . /etc/rc.d/init.d/functions
