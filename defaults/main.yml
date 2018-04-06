@@ -5,7 +5,7 @@
 bamboo_prerequisites:
   - python-psycopg2
 bamboo_version:   5.15.5
-bamboo_baseurl:   http://www.atlassian.com/software/bamboo/downloads/binary
+bamboo_baseurl:   https://www.atlassian.com/software/bamboo/downloads/binary
 bamboo_installer: atlassian-bamboo-{{ bamboo_version }}.tar.gz
 bamboo_user:      bamboo
 # use postgresql or mysql
