@@ -82,7 +82,7 @@
 - name: add proxy config to Tomcat settings
   template:
     src: server.xml.j2
-    dest: /opt/atlassian/bamboo-{{ bamboo_version }}/conf/server.xml
+    dest: "{{ bamboo_installto }}/atlassian/bamboo-{{ bamboo_version }}/conf/server.xml"
     owner: "{{ bamboo_user }}"
     group: "{{ bamboo_user }}"
     mode: 0644
